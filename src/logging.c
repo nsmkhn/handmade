@@ -1,7 +1,7 @@
 #include "logging.h"
 #include <time.h>
 
-static const char* severity_strings[] = { "ERROR", "WARNING", "INFO", "DEBUG" };
+static const char *severity_strings[] = { "ERROR", "WARNING", "INFO", "DEBUG" };
 
 void
 log(const log_info_t *const info)
