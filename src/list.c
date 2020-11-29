@@ -21,14 +21,16 @@ list_create(const int unsigned data_size, const print_func print)
 {
     if (!print)
     {
-        log_np_error(__FILENAME__, __FUNCTION__, __LINE__);
+        log_info_t info = { NULL_POINTER, ERROR, stderr, __FILENAME__, __FUNCTION__, __LINE__ };
+        log(&info);
         exit(EXIT_FAILURE);
     }
     
     list_t *list = malloc(sizeof(list_t));
     if (!list)
     {
-        log_malloc_error(__FILENAME__, __FUNCTION__, __LINE__);
+        log_info_t info = { MALLOC_FAILURE, ERROR, stderr, __FILENAME__, __FUNCTION__, __LINE__ };
+        log(&info);
         exit(EXIT_FAILURE);
     }
     
@@ -44,7 +46,8 @@ list_destroy(list_t *const list)
 {
     if (!list)
     {
-        log_np_error(__FILENAME__, __FUNCTION__, __LINE__);
+        log_info_t info = { NULL_POINTER, ERROR, stderr, __FILENAME__, __FUNCTION__, __LINE__ };
+        log(&info);
         exit(EXIT_FAILURE);
     }
     
@@ -69,21 +72,24 @@ list_add(list_t *const list, const void *const data)
 {
     if (!list || !data)
     {
-        log_np_error(__FILENAME__, __FUNCTION__, __LINE__);
+        log_info_t info = { NULL_POINTER, ERROR, stderr, __FILENAME__, __FUNCTION__, __LINE__ };
+        log(&info);
         exit(EXIT_FAILURE);
     }
     
     node_t *node = malloc(sizeof(node_t));
     if (!node)
     {
-        log_malloc_error(__FILENAME__, __FUNCTION__, __LINE__);
+        log_info_t info = { MALLOC_FAILURE, ERROR, stderr, __FILENAME__, __FUNCTION__, __LINE__ };
+        log(&info);
         exit(EXIT_FAILURE);
     }
     
     node->data = malloc(sizeof(list->data_size));
     if (!node->data)
     {
-        log_malloc_error(__FILENAME__, __FUNCTION__, __LINE__);
+        log_info_t info = { MALLOC_FAILURE, ERROR, stderr, __FILENAME__, __FUNCTION__, __LINE__ };
+        log(&info);
         exit(EXIT_FAILURE);
     }
     
@@ -97,7 +103,8 @@ list_remove(list_t *const list, const void *const data)
 {
     if (!list || !data)
     {
-        log_np_error(__FILENAME__, __FUNCTION__, __LINE__);
+        log_info_t info = { NULL_POINTER, ERROR, stderr, __FILENAME__, __FUNCTION__, __LINE__ };
+        log(&info);
         exit(EXIT_FAILURE);
     }
     
@@ -130,7 +137,8 @@ list_contains(const list_t *const list, const void *const data)
 {
     if (!list || !data)
     {
-        log_np_error(__FILENAME__, __FUNCTION__, __LINE__);
+        log_info_t info = { NULL_POINTER, ERROR, stderr, __FILENAME__, __FUNCTION__, __LINE__ };
+        log(&info);
         exit(EXIT_FAILURE);
     }
     
@@ -148,7 +156,8 @@ list_print(const list_t *const list, FILE *out)
 {
     if (!list)
     {
-        log_np_error(__FILENAME__, __FUNCTION__, __LINE__);
+        log_info_t info = { NULL_POINTER, ERROR, stderr, __FILENAME__, __FUNCTION__, __LINE__ };
+        log(&info);
         exit(EXIT_FAILURE);
     }
     

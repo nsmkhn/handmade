@@ -6,16 +6,31 @@
 
 #define __FILENAME__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
 
-inline void
-log_np_error(const char *const file, const char *const function, const int unsigned line)
+typedef enum error
 {
-    fprintf(stderr, "%s: unexpected null pointer in function \"%s\", line %u\n", file, function, line);
-}
+    NULL_POINTER,
+    MALLOC_FAILURE
+} error_t;
 
-inline void
-log_malloc_error(const char *file, const char *function, const int unsigned line)
+typedef enum severity
 {
-    fprintf(stderr, "%s: failed to allocate memory in function \"%s\", line %u\n", file, function, line);
-}
+    ERROR,
+    WARNING,
+    INFO,
+    DEBUG
+} severity_t;
+
+typedef struct log_info
+{
+    error_t error;
+    severity_t severity;
+    FILE *out;
+    const char *filename;
+    const char *function;
+    int unsigned line;
+} log_info_t;
+
+void
+log(const log_info_t *const);
 
 #endif //LOGGING_H
