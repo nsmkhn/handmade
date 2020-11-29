@@ -1,5 +1,6 @@
 #include "logging.h"
 #include <time.h>
+#include <stdio.h>
 
 static const char *severity_strings[] = { "ERROR", "WARNING", "INFO", "DEBUG" };
 
@@ -13,19 +14,19 @@ log(const log_info_t *const info)
     {
         case NULL_POINTER:
         {
-            fprintf(info->out, "%.19s [%s]: unexpected null pointer in file \"%s\", function \"%s\", line %u\n",
+            fprintf(info->stream, "%.19s [%s]: unexpected null pointer in file \"%s\", function \"%s\", line %u\n",
                     ctime(&now), severity_strings[info->severity], info->filename, info->function, info->line);
         } break;
         
         case MALLOC_FAILURE:
         {
-            fprintf(info->out, "%.19s [%s]: failed to allocate memory in file \"%s\", function \"%s\", line %u\n",
+            fprintf(info->stream, "%.19s [%s]: failed to allocate memory in file \"%s\", function \"%s\", line %u\n",
                     ctime(&now), severity_strings[info->severity], info->filename, info->function, info->line);
         } break;
         
         default:
         {
-            fprintf(info->out, "%.19s [%s]: unknown error in file \"%s\", function \"%s\", line %u\n",
+            fprintf(info->stream, "%.19s [%s]: unknown error in file \"%s\", function \"%s\", line %u\n",
                     ctime(&now), severity_strings[info->severity], info->filename, info->function, info->line);
         } break;
     }

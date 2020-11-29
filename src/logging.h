@@ -24,7 +24,7 @@ typedef struct log_info
 {
     error_t error;
     severity_t severity;
-    FILE *out;
+    FILE *stream;
     const char *filename;
     const char *function;
     int unsigned line;
