@@ -5,32 +5,34 @@
 #include <string.h>
 
 #define __FILENAME__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
-
-typedef enum error
+// TODO(niki): Optimize structs member ordering if possible.
+typedef enum event_type
 {
     NULL_POINTER,
     MALLOC_FAILURE
-} error_t;
+} event_type;
 
-typedef enum severity
+typedef enum log_level
 {
     ERROR,
     WARNING,
     INFO,
     DEBUG
-} severity_t;
+} log_level;
 
 typedef struct log_info
 {
-    error_t error;
-    severity_t severity;
     FILE *stream;
+    log_level level;
     const char *filename;
     const char *function;
     int unsigned line;
 } log_info_t;
+// TODO(niki): Simplify logging api.
+void
+log_event(const event_type, const log_info_t *const);
 
 void
-log(const log_info_t *const);
+log_message(const char *const, const log_info_t *const);
 
 #endif //LOGGING_H
